@@ -17,3 +17,12 @@
     * From same directory as above
     * `qmk flash`
 
+## Moonlander to Voyager conversion
+
+This just drops the missing keys.
+
+```C
+#include "../../../../../moonlander2voyager.h"
+```
+
+Insert this line in `keymap.c`.
