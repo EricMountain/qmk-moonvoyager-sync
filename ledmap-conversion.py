@@ -2,7 +2,6 @@
 
 import re
 import fileinput
-import sys
 
 # Key is the index of the colour in the ledmap. Value is the index into the
 # moonlander ledmap.
@@ -101,6 +100,10 @@ def handle_array_entry(line):
     print("},")
 
 
+# Output the include for the LAYOUT_moonlander macro that handles key remapping
+print('#include "../../../../../moonlander2voyager.h"')
+
+# Remap colour arrays. Moonlander goes column-by-column, Voyager is row-by-row
 array_signature = "const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {"
 array_end_signature = "};"
 parsing_array = False

@@ -19,10 +19,18 @@
 
 ## Moonlander to Voyager conversion
 
-This just drops the missing keys.
+This just drops the missing keys and remaps colour arrays.
 
-```C
-#include "../../../../../moonlander2voyager.h"
+```
+rm -rf downloads/* qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo/* qmk_userspace/keyboards/zsa/voyager/keymaps/bepo/*
+unzip ~/Downloads/zsa_moonlander_moonlander-bepo-v2_yENpo_XXXXXX.zip -d downloads
+cp downloads/zsa_moonlander_moonlander-bepo-v2_source/* qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo
+cp qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo/* qmk_userspace/keyboards/zsa/voyager/keymaps/bepo
+
+
+
+./ledmap-conversion.py < qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo/keymap.c > qmk_userspace/keyboards/zsa/voyager/keymaps/bepo/keymap.c
+qmk compile
+qmk flash
 ```
 
-Insert this line in `keymap.c`.
