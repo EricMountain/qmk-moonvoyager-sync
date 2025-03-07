@@ -22,6 +22,7 @@
 This just drops the missing keys and remaps colour arrays.
 
 ```
+curl -O https://oryx.zsa.io/source/VqqnBe
 rm -rf downloads/* qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo/* qmk_userspace/keyboards/zsa/voyager/keymaps/bepo/*
 unzip ~/Downloads/zsa_moonlander_moonlander-bepo-v2_yENpo_XXXXXX.zip -d downloads
 cp downloads/zsa_moonlander_moonlander-bepo-v2_source/* qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo

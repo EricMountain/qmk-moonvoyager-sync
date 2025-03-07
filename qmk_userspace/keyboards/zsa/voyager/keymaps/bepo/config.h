@@ -1,13 +1,11 @@
 #define ONESHOT_TAP_TOGGLE 2
 
-#define VOYAGER_USER_LEDS
-
 #undef RGB_MATRIX_TIMEOUT
 #define RGB_MATRIX_TIMEOUT 600000
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "yENpo/aNNwYG"
+#define SERIAL_NUMBER "yENpo/VqqnBe"
 #define LAYER_STATE_16BIT
 #define COMBO_COUNT 3
 #define HCS(report) host_consumer_send(record->event.pressed ? report : 0); return false
@@ -50,3 +48,4 @@
 #undef ENABLE_RGB_MATRIX_STARLIGHT
 #undef ENABLE_RGB_MATRIX_STARLIGHT_DUAL_HUE
 #undef ENABLE_RGB_MATRIX_RIVERFLOW
+#define VOYAGER_USER_LEDS
