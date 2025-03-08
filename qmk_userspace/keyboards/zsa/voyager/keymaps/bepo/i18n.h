@@ -48,7 +48,6 @@
 #define BP_F KC_SLSH
 #define BP_DQOT KC_1
 #define BP_ECUT KC_W
-#define BP_0 S(KC_0)
 #define BP_7 S(KC_7)
 #define BP_8 S(KC_8)
 #define BP_9 S(KC_9)
@@ -58,6 +57,7 @@
 #define BP_1 S(KC_1)
 #define BP_2 S(KC_2)
 #define BP_3 S(KC_3)
+#define BP_0 S(KC_0)
 #define BP_RBRC ALGR(KC_5)
 #define BP_RCBR ALGR(KC_C)
 #define BP_RDAQ KC_3
