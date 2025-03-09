@@ -5,7 +5,7 @@
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "yENpo/qmmNmK"
+#define SERIAL_NUMBER "yENpo/7vvdNj"
 #define LAYER_STATE_16BIT
 #define COMBO_COUNT 3
 #define HCS(report) host_consumer_send(record->event.pressed ? report : 0); return false

@@ -6,7 +6,7 @@ rm -rf downloads
 mkdir downloads
 cd downloads
 
-curl -o moonlander_src.zip https://oryx.zsa.io/source/qmmNmK
+curl -o moonlander_src.zip https://oryx.zsa.io/source/7vvdNj
 unzip moonlander_src.zip
 
 cd ..
