@@ -13,9 +13,13 @@ What’s left is mapped to the Voyager straightforwardly.
 
 `{MOONLANDER|VOYAGER}_USER_LEDS` is set in order to turn off the layer indicator LEDs.
 
-## Use
+## Initial setup
 
 * Setup your QMK environment [per the docs for your OS](https://docs.qmk.fm/newbs_getting_started).
+* Run `setup.sh`.
+
+## Use
+
 * Edit `update.sh` with a link to the source zip file supplied by Oryx.
     * For instance on [this layout’s page](https://configure.zsa.io/moonlander/layouts/yENpo/latest), grab URL that "Download Source" links to.
     * Don’t know of a way to grab this URL other than navigating to a layout’s page in-browser.
@@ -29,7 +33,7 @@ This setup confuses ZSA’s Keymapp tool: if the Voyager is connected, it shows 
 
 ## How to rebuild this repo from scratch
 
-* `qmk setup -y -H ./qmk_firmware -b firmware24 zsa/qmk_firmware/`
+* `qmk setup -y -H ./qmk_firmware -b firmware24 zsa/qmk_firmware`
 * Clone `qmk_userspace` locally and remove its .git
     * `qmk config user.overlay_dir="$(realpath qmk_userspace)"`
     * `qmk new-keymap -kb zsa/moonlander -km bepo`
