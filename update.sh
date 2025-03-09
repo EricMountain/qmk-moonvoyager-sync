@@ -20,7 +20,7 @@ cp qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo/* qmk_userspace/keyboards
 echo "#define MOONLANDER_USER_LEDS" >>qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo/config.h
 
 # Voyager conversion and modifications
-./ledmap-conversion.py <qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo/keymap.c >qmk_userspace/keyboards/zsa/voyager/keymaps/bepo/keymap.c
+./moonlander2voyager.py <qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo/keymap.c >qmk_userspace/keyboards/zsa/voyager/keymaps/bepo/keymap.c
 ## Turn off layer LEDs
 echo "#define VOYAGER_USER_LEDS" >>qmk_userspace/keyboards/zsa/voyager/keymaps/bepo/config.h
 
