@@ -102,6 +102,15 @@ def handle_array_entry(line):
     print("},")
 
 
+def boot_to_layer1():
+    """Activates the MacOS layer on boot"""
+    print()
+    print("void matrix_init_user(void) {")
+    print("  layer_on(1);  // Activate Layer 1 on startup")
+    print("}")
+    print()
+
+
 # Output the include for the LAYOUT_moonlander macro that handles key remapping
 print('#include "../../../../../moonlander2voyager.h"')
 
@@ -130,3 +139,5 @@ for line in fileinput.input():
 
     # Any line that isn’t part of the ledmap array we simply output
     print(line, end="")
+
+boot_to_layer1()
