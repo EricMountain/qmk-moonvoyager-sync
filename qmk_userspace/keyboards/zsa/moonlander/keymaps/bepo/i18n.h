@@ -48,11 +48,11 @@
 #define BP_F KC_SLSH
 #define BP_DQOT KC_1
 #define BP_ECUT KC_W
+#define BP_4 S(KC_4)
+#define BP_5 S(KC_5)
 #define BP_7 S(KC_7)
 #define BP_8 S(KC_8)
 #define BP_9 S(KC_9)
-#define BP_4 S(KC_4)
-#define BP_5 S(KC_5)
 #define BP_6 S(KC_6)
 #define BP_1 S(KC_1)
 #define BP_2 S(KC_2)
@@ -66,7 +66,6 @@
 #define BP_LCBR ALGR(KC_X)
 #define BP_LDAQ KC_2
 #define BP_LABK ALGR(BP_LDAQ)
-#define BP_ECIR KC_NUBS
 #define BP_NDSH ALGR(KC_GRV)
 #define BP_MDSH ALGR(KC_1)
 #define BP_DEGR S(KC_MINS)
@@ -77,3 +76,4 @@
 #define BP_AMPR ALGR(KC_E)
 #define BP_TILD ALGR(KC_B)
 #define BP_CIRC ALGR(KC_6)
+#define BP_ECIR KC_NUBS
