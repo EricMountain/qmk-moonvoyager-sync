@@ -13,7 +13,7 @@ mkdir downloads
 cd downloads
 
 # Get the firmware we want to build and unpack
-curl -o moonlander_src.zip https://oryx.zsa.io/source/GGWNOg
+curl -o moonlander_src.zip https://oryx.zsa.io/source/6aDVXr
 unzip moonlander_src.zip
 
 # Clear out the old source files and replace with the new ones
