@@ -33,8 +33,10 @@ This setup confuses ZSA’s Keymapp tool: if the Voyager is connected, it shows 
 
 ## How to rebuild this repo from scratch
 
+* `mkdir qmk-moonvoyager-sync && cd qmk-moonvoyager-sync `
 * `qmk setup -y -H ./qmk_firmware -b firmware24 zsa/qmk_firmware`
 * Clone `qmk_userspace` locally and remove its .git
+    * `git clone https://github.com/qmk/qmk_userspace.git && cd qmk_userspace && rm -rf .git`
     * `qmk config user.overlay_dir="$(realpath qmk_userspace)"`
     * `qmk new-keymap -kb zsa/moonlander -km bepo`
 * `update.sh` should work from this point
