@@ -36,12 +36,12 @@
 #define BP_S KC_K
 #define BP_R KC_L
 #define BP_N KC_SCLN
-#define BP_M KC_QUOT
 #define BP_APOS KC_N
 #define BP_Q KC_M
 #define BP_G KC_COMM
 #define BP_H KC_DOT
 #define BP_F KC_SLSH
+#define BP_M KC_QUOT
 #define BP_4 S(KC_4)
 #define BP_5 S(KC_5)
 #define BP_7 S(KC_7)

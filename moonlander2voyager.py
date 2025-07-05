@@ -3,6 +3,14 @@
 import re
 import fileinput
 
+# Implements Moonlander to Voyager conversions:
+# * Injects the include for the LAYOUT_moonlander macro that handles key remapping
+# * Remaps colour arrays. Moonlander goes column-by-column, Voyager is row-by-row.
+# * Converts chordal_hold_layout from Moonlander to Voyager layout.
+# * Voyager is mostly used with the Mac, so boot to layer 1.
+
+# ledmap conversion data:
+#
 # Array offset is the index of the colour in the ledmap. Value is the offset into the
 # Moonlander ledmap.
 #
@@ -114,30 +122,55 @@ def boot_to_layer1():
 # Output the include for the LAYOUT_moonlander macro that handles key remapping
 print('#include "../../../../../moonlander2voyager.h"')
 
-# Remap colour arrays. Moonlander goes column-by-column, Voyager is row-by-row
-array_signature = "const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {"
-array_end_signature = "};"
-parsing_array = False
+ledmap_start = "const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {"
+ledmap_end = "};"
+parsing_ledmap = False
+
+chordal_hold_layout_start = "const char chordal_hold_layout"
+chordal_hold_layout_end = ");"
+parsing_chordal_hold_layout = False
+chordal_hold_layout_replacement = """const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT(
+  'L', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R',
+  'L', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R',
+                      'L', 'L', 'R', 'R'
+);
+"""
+
 for line in fileinput.input():
-    array_in_line = line.find(array_signature)
-    if not parsing_array and array_in_line != -1:
-        # Start of ledmap array found
-        parsing_array = True
+    # Detect start of ledmap array
+    ledmap_start_offset = line.find(ledmap_start)
+    if not parsing_ledmap and ledmap_start_offset != -1:
+        parsing_ledmap = True
         print(line, end="")
         continue
 
-    # Each line of the array declaration is the ledmap for one layer
-    if parsing_array:
-        end_of_array = line.find(array_end_signature)
-        if end_of_array != -1:
+    # Each line of the ledmap array is the mapping for one layer
+    if parsing_ledmap:
+        ledmap_end_offset = line.find(ledmap_end)
+        if ledmap_end_offset != -1:
             # End of ledmap array found, resume normal processing
-            parsing_array = False
+            parsing_ledmap = False
             print(line, end="")
             continue
         handle_array_entry(line)
         continue
 
-    # Any line that isn’t part of the ledmap array we simply output
+    # Detect start of chordal_hold_layout
+    chordal_hold_layout_start_offset = line.find(chordal_hold_layout_start)
+    if not parsing_chordal_hold_layout and chordal_hold_layout_start_offset != -1:
+        parsing_chordal_hold_layout = True
+        continue
+
+    if parsing_chordal_hold_layout:
+        chordal_hold_layout_end_offset = line.find(chordal_hold_layout_end)
+        if chordal_hold_layout_end_offset != -1:
+            parsing_chordal_hold_layout = False
+            print(chordal_hold_layout_replacement)
+        continue
+
+    # No special handling, just echo the line
     print(line, end="")
 
 boot_to_layer1()
