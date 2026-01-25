@@ -4,6 +4,8 @@
 #undef ONESHOT_TIMEOUT
 #define ONESHOT_TIMEOUT 4000
 
+#define PERMISSIVE_HOLD
+
 #define COMBO_TERM 20
 
 #undef RGB_MATRIX_TIMEOUT
@@ -11,7 +13,7 @@
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "yENpo/wOoreo"
+#define SERIAL_NUMBER "yENpo/m5EYpx"
 #define LAYER_STATE_32BIT
 #define COMBO_COUNT 1
 #define HCS(report) host_consumer_send(record->event.pressed ? report : 0); return false

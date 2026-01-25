@@ -178,12 +178,18 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+
 extern rgb_config_t rgb_matrix_config;
+
+RGB hsv_to_rgb_with_value(HSV hsv) {
+  RGB rgb = hsv_to_rgb( hsv );
+  float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+  return (RGB){ f * rgb.r, f * rgb.g, f * rgb.b };
+}
 
 void keyboard_post_init_user(void) {
   rgb_matrix_enable();
 }
-
 
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     [0] = { {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {42, 255, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {23, 255, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {124, 174, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {86, 200, 235}, {205, 255, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {23, 255, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {42, 255, 255}, {0, 0, 255}, {243, 222, 234}, },
@@ -246,9 +252,8 @@ void set_layer_color(int layer) {
     if (!hsv.h && !hsv.s && !hsv.v) {
         rgb_matrix_set_color( i, 0, 0, 0 );
     } else {
-        RGB rgb = hsv_to_rgb( hsv );
-        float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
-        rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );   
+        RGB rgb = hsv_to_rgb_with_value(hsv);
+        rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
   }
 }
@@ -257,81 +262,70 @@ bool rgb_matrix_indicators_user(void) {
   if (rawhid_state.rgb_control) {
       return false;
   }
-  if (keyboard_config.disable_layer_led) { return false; }
-  switch (biton32(layer_state)) {
-    case 0:
-      set_layer_color(0);
-      break;
-    case 1:
-      set_layer_color(1);
-      break;
-    case 2:
-      set_layer_color(2);
-      break;
-    case 3:
-      set_layer_color(3);
-      break;
-    case 4:
-      set_layer_color(4);
-      break;
-    case 5:
-      set_layer_color(5);
-      break;
-    case 6:
-      set_layer_color(6);
-      break;
-    case 7:
-      set_layer_color(7);
-      break;
-    case 8:
-      set_layer_color(8);
-      break;
-    case 9:
-      set_layer_color(9);
-      break;
-    case 10:
-      set_layer_color(10);
-      break;
-    case 11:
-      set_layer_color(11);
-      break;
-    case 12:
-      set_layer_color(12);
-      break;
-    case 13:
-      set_layer_color(13);
-      break;
-    case 14:
-      set_layer_color(14);
-      break;
-    case 15:
-      set_layer_color(15);
-      break;
-   default:
-    if (rgb_matrix_get_flags() == LED_FLAG_NONE)
+  if (!keyboard_config.disable_layer_led) { 
+    switch (biton32(layer_state)) {
+      case 0:
+        set_layer_color(0);
+        break;
+      case 1:
+        set_layer_color(1);
+        break;
+      case 2:
+        set_layer_color(2);
+        break;
+      case 3:
+        set_layer_color(3);
+        break;
+      case 4:
+        set_layer_color(4);
+        break;
+      case 5:
+        set_layer_color(5);
+        break;
+      case 6:
+        set_layer_color(6);
+        break;
+      case 7:
+        set_layer_color(7);
+        break;
+      case 8:
+        set_layer_color(8);
+        break;
+      case 9:
+        set_layer_color(9);
+        break;
+      case 10:
+        set_layer_color(10);
+        break;
+      case 11:
+        set_layer_color(11);
+        break;
+      case 12:
+        set_layer_color(12);
+        break;
+      case 13:
+        set_layer_color(13);
+        break;
+      case 14:
+        set_layer_color(14);
+        break;
+      case 15:
+        set_layer_color(15);
+        break;
+     default:
+        if (rgb_matrix_get_flags() == LED_FLAG_NONE) {
+          rgb_matrix_set_color_all(0, 0, 0);
+        }
+    }
+  } else {
+    if (rgb_matrix_get_flags() == LED_FLAG_NONE) {
       rgb_matrix_set_color_all(0, 0, 0);
-    break;
+    }
   }
+
   return true;
 }
 
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case MAC_LOCK:
-      HCS(0x19E);
-
-    case RGB_SLD:
-        if (rawhid_state.rgb_control) {
-            return false;
-        }
-        if (record->event.pressed) {
-            rgblight_mode(1);
-        }
-        return false;
-  }
-  return true;
-}
 
 
 typedef struct {
@@ -340,12 +334,12 @@ typedef struct {
 } tap;
 
 enum {
-    SINGLE_TAP = 1,
-    SINGLE_HOLD,
-    DOUBLE_TAP,
-    DOUBLE_HOLD,
-    DOUBLE_SINGLE_TAP,
-    MORE_TAPS
+    SINGLE_TAP = 1,      
+    SINGLE_HOLD,         
+    DOUBLE_TAP,          
+    DOUBLE_HOLD,         
+    DOUBLE_SINGLE_TAP,   
+    MORE_TAPS            
 };
 
 static tap dance_state[1];
@@ -388,6 +382,40 @@ void dance_0_reset(tap_dance_state_t *state, void *user_data) {
 tap_dance_action_t tap_dance_actions[] = {
         [DANCE_0] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_0_finished, dance_0_reset),
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+  case QK_MODS ... QK_MODS_MAX: 
+    // Mouse keys with modifiers work inconsistently across operating systems, this makes sure that modifiers are always
+    // applied to the mouse key that was pressed.
+    if (IS_MOUSE_KEYCODE(QK_MODS_GET_BASIC_KEYCODE(keycode))) {
+    if (record->event.pressed) {
+        add_mods(QK_MODS_GET_MODS(keycode));
+        send_keyboard_report();
+        wait_ms(2);
+        register_code(QK_MODS_GET_BASIC_KEYCODE(keycode));
+        return false;
+      } else {
+        wait_ms(2);
+        del_mods(QK_MODS_GET_MODS(keycode));
+      }
+    }
+    break;
+    case MAC_LOCK:
+      HCS(0x19E);
+
+    case RGB_SLD:
+        if (rawhid_state.rgb_control) {
+            return false;
+        }
+        if (record->event.pressed) {
+            rgblight_mode(1);
+        }
+        return false;
+  }
+  return true;
+}
+
 
 void matrix_init_user(void) {
   layer_on(1);  // Activate Layer 1 on startup

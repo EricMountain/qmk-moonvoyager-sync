@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # Housekeeping: update the ZSA fork of QMK
-cd qmk_firmware
-git pull --ff-only
-cd ..
+# cd qmk_firmware
+# git pull --ff-only
+# cd ..
 
 # Clean out the previously downloaded firmware
 rm -rf downloads
@@ -13,7 +13,7 @@ mkdir downloads
 cd downloads
 
 # Get the firmware we want to build and unpack
-curl -o moonlander_src.zip https://oryx.zsa.io/source/wOoreo
+curl -o moonlander_src.zip https://oryx.zsa.io/source/m5EYpx
 unzip moonlander_src.zip
 
 # Clear out the old source files and replace with the new ones
@@ -32,13 +32,13 @@ echo "#define MOONLANDER_USER_LEDS" >>qmk_userspace/keyboards/zsa/moonlander/key
 echo "#define VOYAGER_USER_LEDS" >>qmk_userspace/keyboards/zsa/voyager/keymaps/bepo/config.h
 
 # Build and flash Moonlander
-cd qmk_userspace/keyboards/zsa/moonlander/keymaps/bepo
-qmk compile
-qmk flash
-
-cd -
+cd qmk_userspace
+qmk compile -kb zsa/moonlander/reva -km bepo
+qmk flash -kb zsa/moonlander/reva -km bepo
+cd ..
 
 # Build and flash Voyager
-cd qmk_userspace/keyboards/zsa/voyager/keymaps/bepo
-qmk compile
-qmk flash
+# cd qmk_userspace
+# qmk compile -kb zsa/voyager -km bepo
+# qmk flash -kb zsa/voyager -km bepo
+# cd ..
