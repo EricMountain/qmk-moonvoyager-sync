@@ -172,6 +172,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM -25;
         case BP_Q:
             return TAPPING_TERM -50;
+        case MT(MOD_RALT, KC_ENTER):
+            return TAPPING_TERM -100;
         default:
             return TAPPING_TERM;
     }
