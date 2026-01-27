@@ -38,7 +38,7 @@ qmk flash -kb zsa/moonlander/reva -km bepo
 cd ..
 
 # Build and flash Voyager
-# cd qmk_userspace
-# qmk compile -kb zsa/voyager -km bepo
-# qmk flash -kb zsa/voyager -km bepo
-# cd ..
+cd qmk_userspace
+qmk compile -kb zsa/voyager -km bepo
+qmk flash -kb zsa/voyager -km bepo
+cd ..
