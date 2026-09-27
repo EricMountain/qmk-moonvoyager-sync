@@ -1,10 +1,9 @@
+#define FLOW_TAP_TERM 100
 #define CHORDAL_HOLD
 #define ONESHOT_TAP_TOGGLE 2
 
 #undef ONESHOT_TIMEOUT
 #define ONESHOT_TIMEOUT 4000
-
-#define PERMISSIVE_HOLD
 
 #define COMBO_TERM 20
 
@@ -13,7 +12,8 @@
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "yENpo/B4qBb0"
+#define HOLD_ON_OTHER_KEY_PRESS
+#define SERIAL_NUMBER "yENpo/dP9M9Z"
 #define LAYER_STATE_32BIT
 #define COMBO_COUNT 1
 #define HCS(report) host_consumer_send(record->event.pressed ? report : 0); return false

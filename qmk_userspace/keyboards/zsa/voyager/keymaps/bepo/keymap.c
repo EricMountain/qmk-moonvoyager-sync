@@ -327,7 +327,6 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 
-
 typedef struct {
     bool is_press_action;
     uint8_t step;
