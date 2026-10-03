@@ -72,4 +72,6 @@
 #define BP_AMPR ALGR(KC_E)
 #define BP_TILD ALGR(KC_B)
 #define BP_CIRC ALGR(KC_6)
+#define BP_EURO ALGR(KC_F)
+#define BP_OE ALGR(KC_R)
 #define BP_ECIR KC_NUBS

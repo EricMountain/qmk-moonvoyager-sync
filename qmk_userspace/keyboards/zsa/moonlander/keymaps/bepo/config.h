@@ -13,8 +13,11 @@
 #define RGB_MATRIX_TIMEOUT 600000
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
+#undef MOUSEKEY_INTERVAL
+#define MOUSEKEY_INTERVAL 25
+
 #define CAPS_LOCK_STATUS
-#define SERIAL_NUMBER "yENpo/wOXbGq"
+#define SERIAL_NUMBER "yENpo/pjMWzW"
 #define LAYER_STATE_32BIT
 #define COMBO_COUNT 1
 #define HCS(report) host_consumer_send(record->event.pressed ? report : 0); return false
